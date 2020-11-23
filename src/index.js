@@ -301,6 +301,7 @@ class App extends Component {
                   .filter(user => user.username !== this.state.user)
                   .map((user, i) => {
                     return <ChatPreview
+                    key={i}
                     title={user.username}
                     status={user.status}
                     active={false}
