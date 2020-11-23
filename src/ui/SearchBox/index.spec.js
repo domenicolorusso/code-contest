@@ -1,7 +1,7 @@
 import React from 'react';
 import SearchBox, { SearchInput, SearchContainer } from './';
 
-describe('<SeachBox />', () => {
+describe('<SearchBox />', () => {
     it('should call on submit', () => {
         const onChangeMock = jest.fn();
         const onSubmitMock = jest.fn();
