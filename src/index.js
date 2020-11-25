@@ -11,8 +11,8 @@ class App extends Component {
     userId: '',
     user: '',
     userStatus: 'offline',
-    username: 'demo',
-    password: 'demo',
+    username: 'team5',
+    password: 'cambiala',
     showPassword: false,
     listUsers: [],
     activeUser: {},
@@ -303,9 +303,29 @@ class App extends Component {
                     return <ChatPreview
                     key={i}
                     title={user.username}
+                    lastMessage={{
+                      message:
+                        this.state.rooms[user.username] &&
+                          this.state.rooms[user.username].lastMessage
+                          ? this.state.rooms[user.username].lastMessage.msg
+                          : '',
+                      time:
+                        this.state.rooms[user.username] &&
+                          this.state.rooms[user.username].lastMessage
+                          ? this.state.rooms[user.username].lastMessage.ts
+                          : ''
+                    }}
                     status={user.status}
-                    active={false}
-                    onClick={() => {}}
+                    active={
+                      this.state.activeUser.username === user.username
+                    }
+                    onClick={() => {
+                      this.createDirectMessageChat(user.username);
+                      this.setState({
+                        activeUser: user,
+                        messageValue: ''
+                      });
+                    }}
                   />
                   
                     // <ChatPreview user={user} key={i} />
@@ -335,7 +355,18 @@ class App extends Component {
               </div>
               {this.state.activeUser.username && (
                 <div className="sendBoxContainer">
-                  {/* TODO Insert here the sendbox */}
+                  <SendBox  placeholder='type message here' 
+                    value={this.state.messageValue}
+                    onChange={(e) =>{ 
+                    this.setState({messageValue: e.target.value })}}
+                    onSubmit={(e) => this.callApiPostMessage(e)}
+                    
+                    
+                    />
+
+
+
+                  {/* placeholder, value, onAttachClick, onChange, onMicClick, onSubmit */}
                 </div>
               )}
             </div>

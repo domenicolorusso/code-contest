@@ -114,9 +114,10 @@ export class Api {
    */
   sendMessage({ userId, activeRoom, message }) {
 
-    return fetch('api/v1/chat.postMessage', {
+    return fetch(`${config.apiUri}api/v1/chat.postMessage`, {
         method: 'POST',
         body: JSON.stringify({
+          channel: activeRoom,
           text: message
         }),
         headers: {
