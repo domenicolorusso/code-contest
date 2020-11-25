@@ -347,9 +347,12 @@ class App extends Component {
               <div className="messageList">
                 {this.state.rooms[this.state.activeUser.username] &&
                   this.state.rooms[this.state.activeUser.username].messages.map(
-                    message => {
-                      {/* TODO Insert here the messages */}
-                      return null;
+                    (message) => {
+                      console.log(message)
+                      return <Message message={message.msg} key={message._id} 
+                      dateMessage={message._updatedAt} received={message.u.username===this.state.username ? false : true}
+                      />
+                      
                     }
                   )}
               </div>
